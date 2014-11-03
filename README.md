@@ -6,4 +6,4 @@ heavenly bodies by Marshall Abrams.
 
 Text and software is copyright 2014 by Marshall Abrams. The software is
 distributed under the Gnu General Public License version 3.0, available
-at http://members.logical.net/~marshall/gpl30.html.
+in the file LICENSE.
