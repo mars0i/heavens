@@ -1,0 +1,155 @@
+<!-- This software is copyright 2014 by Marshall Abrams, and
+is distributed under the Gnu General Public License version 3.0 as
+described in http://members.logical.net/~marshall/gpl30.html. -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Pontano Sans" />
+		<style>
+			.cycle {
+				stroke : #000000;
+				fill : none;
+			}
+			.movingPointOnCycle {
+				stroke : #000000;
+				fill : #000000;
+			}
+			#pointB {
+				stroke : #0000FF;
+				fill : #0000FF;
+			}
+			#epicycle2 {
+				stroke : #0000FF;
+			}
+			.centerOfUniverse {
+				stroke : #000000;
+				fill : #000000;
+			}
+			.sun {
+				stroke : #000000;
+				fill : #F0F000;
+			}
+			.mars {
+				stroke : #000000;
+				fill : #A00000;
+			}
+			.earth {
+				stroke : #000000;
+				fill : #00A000;
+			}
+			.pointLabel {
+				font-family: "Pontano Sans";
+				font-size: 10px; 
+			}
+			.title {
+				font-family: "Pontano Sans";
+				font-size: 30px; 
+			}
+			.citation {
+				font-family: "Pontano Sans";
+				font-size: 25px; 
+			}
+			.by {
+				font-family: "Pontano Sans";
+				font-size: 20px; 
+			}
+			.explan {
+				font-family: "Pontano Sans";
+				font-size: 16px; 
+			}
+			.license {
+				font-family : "Pontano Sans";
+				font-size : 70%;
+			}
+		</style>
+	</head>
+	<body>
+		<center><div class="title">Schematic animation of Copernican model of Mars' motion</div></center>
+		<center><div class="citation">(based on Richard DeWitt's <em>Worldviews</em>&nbsp; 2nd ed., figure 14.1)</div></center>
+		<center><div class="by"><a href="http://members.logical.net/~marshall">Marshall Abrams</a>, Department of Philosophy, University of Alabama at Birmingham.</div></center>
+		<center><div class="explan">(<b>Yellow:</b> Sun.&nbsp; <b>Red:</b> Mars.&nbsp; All other dots are simply centers of epicycles and/or points on orbits.  Sizes are not to scale.)</div></center>
+		<!-- <center><div class="citation">and Thomas Kuhn's <em>The Copernican Revolution</em>, figure 34)</div></center> -->
+		<div id="planetarium">
+			<svg width="800" height="550">
+			<!-- center everything else on middle of svg -->
+			<g transform="translate(400,260) scale(1.3)"> <!-- i.e. half the width and height of the svg -->
+				<circle class="sun" r="10"></circle><!-- center of universe -->
+
+				<!-- TIP: In this hardcoded version, the translate value has to be the same as the radius r of the preceding circle. -->
+
+				<!-- orbit around center of universe -->
+				<g class="cycle"speed="0.01">
+					<circle id="deferent" class="cycle" r="60"></circle> 
+					<!-- group including point on edge of deferent, and everything rotating around it -->
+					<g class="epicycleCenter" transform="translate(60,0)"> <!-- push out to the 90degree point on the radius i.e. should match r of enclosing circle -->
+						<circle id="pointD" class="movingPointOnCycle" r="2"></circle><!-- what moves on edge of circle -->
+						<!-- <text class="pointLabel" x="5" y="5">D</text> -->
+
+							<!-- group containing next epicycle -->
+							<g class="cycle"speed="0.01">
+								<circle id="epicycle1" class="cycle" r="20"></circle>
+								<g class="epicycleCenter" transform="translate(20,0)"> <!-- push out to the 90degree point on the radius i.e. should match r of enclosing circle -->
+									<circle id="pointC" class="movingPointOnCycle" r="2"></circle>
+
+									<!-- group that displaces center of next epicycle. A Copernican specialty item. -->
+									<g class="shift" speed="-0.02" displacement="-25"><!-- I don't understand why this has to be -0.02 to keep relationship vertical.  When it was in a different position among the points, the speed needed to be -0.01 -->
+										<circle id="pointB" class="movingPointOnCycle" r="2"></circle>
+										<!-- line showing displacement: -->
+										<line x1="0" y1="0" x2="0" y2="25" stroke-dasharray="1,2"></line>
+
+										<!-- group containing next epicycle -->
+										<g class="cycle"speed="0.01">
+											<circle id="epicycle2" class="cycle" r="75"></circle>
+											<g class="epicycleCenter" transform="translate(75,0)"> <!-- push out to the 90degree point on the radius i.e. should match r of enclosing circle -->
+												<circle id="pointA" class="movingPointOnCycle" r="2"></circle>
+		
+												<!-- group containing next epicycle -->
+												<g class="cycle"speed="0.01">
+													<circle id="epicycle3" class="cycle" r="25"></circle>
+													<g class="planet" transform="translate(25,0)"> <!-- change to epicycleCenter if add another epicycle -->
+														<circle id="mars" class="mars" r="4"></circle> <!-- Finally: The Planet! -->
+													</g>
+												</g>
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+			</svg>
+		</div>
+
+		<br/><br/>
+		<div class="license">
+		<center>
+			(This software is copyright 2014 by Marshall Abrams, and is distributed under the 
+			Gnu General Public License version 3.0, available at 
+			<a href="http://members.logical.net/~marshall/gpl30.html">http://members.logical.net/~marshall/gpl30.html</a>.)
+		</center>
+		</div>
+
+
+		<script type="text/javascript">
+			var t0 = Date.now();
+			var svg = d3.select("svg");
+			d3.timer(function() {
+				var delta = (Date.now() - t0);
+				// if (delta > 1000) {return true;} // DEBUG: stop after 1 second
+			
+				svg.selectAll(".cycle").attr("transform", function(d) {
+					return "rotate(" + delta * d3.select(this).attr("speed") + ")";
+				});
+				svg.selectAll(".shift").attr("transform", function(d) {
+					return "rotate(" + delta * d3.select(this).attr("speed") + ")" 
+					       + 
+					       "translate(0," + d3.select(this).attr("displacement") + ")"
+					       ;
+				});
+			});
+		</script>
+	</body>
+</html>
+

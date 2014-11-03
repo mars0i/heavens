@@ -1,0 +1,201 @@
+<!-- This software is copyright 2014 by Marshall Abrams, and
+is distributed under the Gnu General Public License version 3.0 as
+described in http://members.logical.net/~marshall/gpl30.html. -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Pontano Sans" />
+		<style>
+			text {
+				font-family : "Pontano Sans";
+			}
+			.text {
+				font-family : "Pontano Sans";
+			}
+			.explanation {
+				font-family : "Pontano Sans";
+				font-size : 90%;
+			}
+			.license {
+				font-family : "Pontano Sans";
+				font-size : 70%;
+			}
+			.title {
+				font-family : "Pontano Sans";
+				font-size : 150%;
+				font-weight : normal;
+			}
+			.who {
+				font-family : "Pontano Sans";
+				font-size : 85%;
+			}
+			.cycle {
+				stroke : #000000;
+				fill : none;
+			}
+			.radius {
+				stroke : #000000;
+				fill : none;
+			}
+			#sun {
+				stroke : #000000;
+				fill : #FFE000;
+			}
+			#mars {
+				stroke : #000000;
+				fill : #E00000;
+			}
+			#earth {
+				stroke : #000000;
+				fill : #00D0E0;
+			}
+		</style>
+	</head>
+	<body>
+		<span id="controls">
+			<button id="stop">Start/Stop</button>
+			<button id="restart">Restart</button>
+			&nbsp;&nbsp;
+			<span class="title">On the equivalence of Copernicus' and Tycho's systems</span><br/>
+			<span class="who" position="absolute" left="100">
+			(See notes below.)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="http://members.logical.net/~marshall">Marshall Abrams</a>, Department of Philosophy, University of
+				Alabama at Birmingham.</span>
+		</span>
+		<svg width="1000" height="500">
+		<g id="overallGroup1" transform="translate(200,260)">
+		<text x="-40" y="-230">Copernicus</text>
+		<g id="outerGroup1">
+		<g id="rotateGroup1">
+			<g id="innerGroup1">
+				<g id="marsGroup1" class="cycleGroup" speed="-0.03">
+				<line id="marsAxis" class="radius" x1="0" y1="0" x2="0" y2="-150" stroke="black" stroke-dasharray="2,2"></line>
+				<!-- <circle id="marsOrbit" class="cycle" r="150"></circle> -->
+				<circle id="mars" class="planet" r="4" cx="0" cy="-150"></circle>
+				</g>
+	
+				<g id="earthGroup1" class="cycleGroup" speed="-0.10">
+				<line id="earthAxis" class="radius" x1="0" y1="0" x2="80" y2="0" stroke="black" stroke-opacity="1" stroke-dasharray="2,2"></line>
+				<!-- <circle id="earthOrbit" class="cycle" r="80" stroke="black" stroke-opacity="1"></circle> -->
+				<circle id="earth" class="planet" r="6" cx="80" cy="0"></circle>
+				</g>
+	
+				<g id="sunGroup1">
+				<!-- <line id="sunAxis" class="radius" x1="0" y1="0" x2="80" y2="0" stroke="black" stroke-opacity="0" stroke-dasharray="2,2"></line> --><!-- overlays earth line -->
+				<!-- <circle id="sunOrbit" class="cycle" r="80" stroke="black" stroke-opacity="0"></circle> -->
+				<circle id="sun" class="planet" r="17"></circle>
+				</g>
+	
+			</g>
+			<circle id="centerOfUniverse" class="rotateGroupCenter" r="2" color="blue"></circle>
+		</g>
+		</g>
+		</g>
+
+		<g id="overallGroup2" transform="translate(600,260)">
+		<text x="-20" y="-230">Tycho</text>
+		<g id="outerGroup2">
+		<g id="rotateGroup2">
+			<g id="innerGroup2">
+				<g id="marsGroup2" class="cycleGroup" speed="-0.03">
+				<line id="marsAxis" class="radius" x1="0" y1="0" x2="0" y2="-150" stroke="black" stroke-dasharray="2,2"></line>
+				<!-- <circle id="marsOrbit" class="cycle" r="150"></circle> -->
+				<circle id="mars" class="planet" r="4" cx="0" cy="-150"></circle>
+				</g>
+	
+				<g id="earthGroup2" class="cycleGroup" speed="-0.10">
+				<line id="earthAxis" class="radius" x1="0" y1="0" x2="80" y2="0" stroke="black" stroke-opacity="1" stroke-dasharray="2,2"></line>
+				<!-- <circle id="earthOrbit" class="cycle" r="80" stroke="black" stroke-opacity="1"></circle> -->
+				<circle id="earth" class="planet" r="6" cx="80" cy="0"></circle>
+				</g>
+	
+				<g id="sunGroup2">
+				<!-- <line id="sunAxis" class="radius" x1="0" y1="0" x2="80" y2="0" stroke="black" stroke-opacity="0" stroke-dasharray="2,2"></line> --><!-- overlays earth line -->
+				<!-- <circle id="sunOrbit" class="cycle" r="80" stroke="black" stroke-opacity="0"></circle> -->
+				<circle id="sun" class="planet" r="17"></circle>
+				</g>
+	
+			</g>
+			<circle id="centerOfUniverse" class="rotateGroupCenter" r="2" color="blue"></circle>
+		</g>
+		</g>
+		</g>
+		</svg>
+		<div class="explanation">
+			<b>Yellow:</b> Sun.&nbsp; <b>Blue:</b> Earth.&nbsp; <b>Red:</b> Mars.&nbsp; <b>Black dot:</b> center of the universe.<br/>
+			In both Copernicus' and Tycho's systems, Mercury, Venus, Mars, Saturn, and Jupiter go around the Sun.  Each has a
+			roughly circular orbit.&nbsp;  (Because Copernicus' and Tycho's models include epicycles, the paths of the planets are
+			not perfectly circular.)&nbsp;
+			Copernicus' and Tycho's systems differ in that in Copernicus' system, the Earth goes around the Sun, which is the center of the
+			universe, while in Tycho's system, the Earth is the center of the universe and the Sun goes around it.&nbsp;  Tycho's system is
+			mathematically equivalent to Copernicus' system: It preserves all of the angles and relative positions of objects in relation to
+			each other.&nbsp;  Since this is true for all of the planets, we can illustrate the idea by looking at simplified Copernican and Tychonic
+			models of a single planet along with the Earth and the Sun, using circular orbits.&nbsp;  As the animation runs, notice that although the center of
+			the "universe" is different in each model, the angles and positions of objects relative to each other are the same.
+		</div>
+
+		<br/><br/>
+		<div class="license">
+			(This text and software is copyright 2014 by Marshall Abrams.  The software is distributed 
+			under the Gnu General Public License version 3.0, available at 
+			<a href="http://members.logical.net/~marshall/gpl30.html">http://members.logical.net/~marshall/gpl30.html</a>.)
+		</div>
+
+
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script type="text/javascript">
+			var t0 = 0;
+			var delta = 0;
+			var overallSpeed = 0.25;
+			var animationStopped = true;
+
+			var svg = d3.select("svg");
+
+			d3.select("#stop").on("click", function() {
+				if (animationStopped) {
+					t0 = Date.now() - delta; // preserves position while stopped
+					animationStopped = false;
+					runTimer();
+				} else {
+					animationStopped = true; // will stop the timer
+				}
+			});
+
+			d3.select("#restart").on("click", function() {
+				t0 = Date.now();
+				runTimer();
+				animationStopped = true;
+			});
+
+			// nodes that in class cycleGroup will get rotations proportional to their speed attribute
+			// can this be simplified?  better to do it inline in the svg?
+			svg.select("#outerGroup1").attr("transform", null);
+			svg.select("#rotateGroup1").attr("speed", null).classed({"cycleGroup": false});
+			svg.select("#earthGroup1").attr("speed", "-0.10").classed({"cycleGroup": true});
+			svg.select("#marsGroup1").attr("speed", "-0.03");
+			svg.select("#innerGroup1").attr("transform", null);
+
+			svg.select("#outerGroup2").attr("transform", "translate(80,0)");
+			svg.select("#rotateGroup2").attr("speed", "0.10").classed({"cycleGroup": true});
+			svg.select("#earthGroup2").attr("speed", null).classed({"cycleGroup": false});
+			svg.select("#marsGroup2").attr("speed", "0.07"); // why do I have to do this to keep them in sync???
+			svg.select("#innerGroup2").attr("transform", "translate(-80,0)");
+
+			runTimer = function() {
+				d3.timer(function() {
+					var groupString = "";
+
+					delta = (Date.now() - t0);
+					svg.selectAll(".cycleGroup").attr("transform", function(d) {
+						var speed = d3.select(this).attr("speed");
+						return "rotate(" + overallSpeed * delta * speed + ")";
+					});
+
+					return animationStopped; // false means keep going
+				});
+			}
+		</script>
+	</body>
+</html>
